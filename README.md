@@ -6,3 +6,5 @@
 4. regression task using pytorch
 5. Analyzing loss.backward(), optimizer.step() and optimizer.zero_grad() 
 6. mnist classification 
+7. simple encoder decoder architecture 
+8. encoder decoder with attention 
