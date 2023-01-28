@@ -29,7 +29,7 @@ This output will pass through multiple encoder layers and finally a full connect
 - Each example across batch dimension is of course processed completely independently and never "talk" to each other
 - In an "encoder" attention block just delete the single line that does masking with `tril`, allowing all tokens to communicate. This block here is called a "decoder" attention block because it has triangular masking, and is usually used in autoregressive settings, like language modeling.
 - "self-attention" just means that the keys and values are produced from the same source as queries. In "cross-attention", the queries still get produced from x, but the keys and values come from some other, external source (e.g. an encoder module)
-- "Scaled" attention additional divides `wei` by 1/sqrt(head_size). This makes it so when input Q,K are unit variance, wei will be unit variance too and Softmax will stay diffuse and not saturate too much. Illustration below
+- "Scaled" attention additional divides `weights` by 1/sqrt(head_size). This makes it so when input Q,K are unit variance, wei will be unit variance too and Softmax will stay diffuse and not saturate too much. Illustration below
 
 ## Decoding part 
 In the decoder part, we have a masked self attention layer first. Remember, in the training stage, decoder predicts the outputs all at ones using masked attention. But in inference or testing stage it predicts the outputs one by one. In masked attention, each token attention vector is created by considering all the tokens from the past. The steps in decoder part are token embedding, then positional embedding, addition of both, masked multi-headed self attention, encoder-decoder multi-headed cross attention, linear and finally the softmax layer. 
