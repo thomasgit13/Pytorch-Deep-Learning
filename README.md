@@ -8,3 +8,5 @@
 6. mnist classification 
 7. simple encoder decoder architecture 
 8. encoder decoder with attention 
+9. Transformer utils 
+10. NanoGPT - Andrej Karpthy
