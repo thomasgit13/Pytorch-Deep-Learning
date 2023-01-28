@@ -1,10 +1,10 @@
 # Transformer Architecture 
-![image](.images/transfomer_architecture.png) 
+![image](../images/self_attention.png) 
 We have an input sequence and a target sequence of length 8 (8 tokens). For the training, we take the batch size as 64 and model dimension as 512. So the first batch input will be of shape (64,8,512). To this input we add positional embeddings and the output will be of same dimension
 
 Now comes the first encoder which takes the (64,8,512) input. We have 8 tokens, so we need to get a new representation for this vector by taking some weighted aggregation of other tokens. Now we make 3 copies of input(queries,keys,values).
 
-![image](./images/self_attention.png)
+![image](../images/transformer_architecuture.png) 
 - Queries are $q_1,q_2,q_3,...,q_8$ each query has  dimension $d_q$.
 - Values  are $v_1,v_2,...,v_8$ each value has dimension $d_v$.
 - Keys are $k_1,k_2,... ,k_8$ each key has dimension $d_k$.

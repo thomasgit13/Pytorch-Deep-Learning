@@ -20,7 +20,7 @@ $$
 \end{align}
 $$
 
-![image](./images/batch_normalization.png)
+![image](../images/batch_normalization.png)
 - Batch normalization normalizes each feature independently across the mini-batch. Layer normalization normalizes each of the inputs in the batch independently  across all features.
 - As batch normalization is dependent on batch size, it’s not effective for small batch sizes. Lyaer normalization is independent of the batch size, so it can be applied to batches with smaller sizes as well.
 - During training, batch normalization computes the mean and standard deviation coresponding to the mini-batch. However, at test time(inference time), we may not necessarily have a batch to compute the batch mean and variance. To overcome this limitation, the model workds by maintaining a moving average of mean and variance at training time, called the moving mean and moving variance. These values are accumulated across batches at training time and used as mean and variance at inference time.
