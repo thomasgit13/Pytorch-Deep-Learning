@@ -20,7 +20,7 @@ $$
 \end{align}
 $$
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b31eb06e-3fb1-4544-89b4-253b28afcec7/Untitled.png)
+![image](./images/transformer_architecuture.png)
 
 - Batch normalization normalizes each feature independently across the mini-batch. Layer normalization normalizes each of the inputs in the batch independently  across all features.
 - As batch normalization is dependent on batch size, it’s not effective for small batch sizes. Lyaer normalization is independent of the batch size, so it can be applied to batches with smaller sizes as well.
