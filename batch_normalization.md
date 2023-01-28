@@ -1,4 +1,4 @@
-# Batch Normalization
+# Batch and Layer Normalization
 
 In batch normalization, we find the mean and standard deviation of all features across batch. 
 
