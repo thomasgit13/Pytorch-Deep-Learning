@@ -30,3 +30,25 @@ We take the target sequence first, then we apply positional embedding.
 Then it creates a masked self attention matrix. We take this output as query matrix for the next multi-headed attention layers.
 
 Finally the ouputs will pass through linear and softmax layers.
+
+
+
+## Inference Process 
+* At first time step one we have only one token 
+* decoder_start_token_shape = $(1,128)$ 
+* creating three copies ( for masked self attention)
+* multiplying $q.k^T => (1,1)$ -> a single weight vector
+* multiplying with the value vectors and getting * aggregated measure 
+* $weight* values => (1,128)$ 
+* This is the query for the next layer* (encoder-decoder cross attention)
+* from encoder we got keys and values of shape (1,7,* 128) -> 7 is the number of tokens 
+* $(1,1,128)*(1,128,7) => (1,1,7)$ -> 7 weights of the * input query with all the keys in the encoder key * matrix 
+* multiplying $(1,1,7)*values$ 
+* $(1,1,7)*(1,7,128) => (1,1,128)$ 
+* This output will pass through linear layer which * takes a tensor of feature dimension 128 
+* linear layer will output the final output * dimensions 
+* At the second time step we have two tokens (sos * token and the first decoder output which is * predicted)
+
+* So the input will be of shape $(1,2,128)$ 
+* self attention output will be again $(1,2,128)$
+
