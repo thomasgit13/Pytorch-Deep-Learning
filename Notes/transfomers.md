@@ -1,5 +1,7 @@
 # Transformer Architecture 
-![image](../images/self_attention.png) 
+
+## Encoding Part
+![image](../images/self_attention.png)
 We have an input sequence and a target sequence of length 8 (8 tokens). For the training, we take the batch size as 64 and model dimension as 512. So the first batch input will be of shape (64,8,512). To this input we add positional embeddings and the output will be of same dimension
 
 Now comes the first encoder which takes the (64,8,512) input. We have 8 tokens, so we need to get a new representation for this vector by taking some weighted aggregation of other tokens. Now we make 3 copies of input(queries,keys,values).
@@ -21,8 +23,15 @@ Attention weight matrix will be of shape $(T,T)$. This weight will be multiplied
 
 This output will pass through multiple encoder layers and finally a full connected layer, and the final output will of shape $(B,T,d_m)$. 
 
-This completes the encoder part. 
+### Intuition of Self-Attention 
+- Attention is a **communication mechanism**. Can be seen as nodes in a directed graph looking at each other and aggregating information with a weighted sum from all nodes that point to them, with data-dependent weights.
+- There is no notion of space. Attention simply acts over a set of vectors. This is why we need to positionally encode tokens.
+- Each example across batch dimension is of course processed completely independently and never "talk" to each other
+- In an "encoder" attention block just delete the single line that does masking with `tril`, allowing all tokens to communicate. This block here is called a "decoder" attention block because it has triangular masking, and is usually used in autoregressive settings, like language modeling.
+- "self-attention" just means that the keys and values are produced from the same source as queries. In "cross-attention", the queries still get produced from x, but the keys and values come from some other, external source (e.g. an encoder module)
+- "Scaled" attention additional divides `wei` by 1/sqrt(head_size). This makes it so when input Q,K are unit variance, wei will be unit variance too and Softmax will stay diffuse and not saturate too much. Illustration below
 
+## Decoding part 
 In the decoder part, we have a masked self attention layer first. Remember, in the training stage, decoder predicts the outputs all at ones using masked attention. But in inference or testing stage it predicts the outputs one by one. In masked attention, each token attention vector is created by considering all the tokens from the past. The steps in decoder part are token embedding, then positional embedding, addition of both, masked multi-headed self attention, encoder-decoder multi-headed cross attention, linear and finally the softmax layer. 
 
 We take the target sequence first, then we apply positional embedding. 
