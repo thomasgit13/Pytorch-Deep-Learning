@@ -10,3 +10,4 @@
 8. encoder decoder with attention 
 9. Transformer utils 
 10. NanoGPT - Andrej Karpthy
+11. CBOW and SkipGram Implementations
